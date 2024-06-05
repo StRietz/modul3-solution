@@ -45,7 +45,7 @@
             })
             .then(function (result){
                 var filteredItems = [];
-                console.log("Was steht in result im Service: " + result);
+                console.log("Was steht in result im Service: " + result.data);
                 var foundItems = result.data;//[{name: "katze"}, {short_name: "katzenfutte"},{description:"lekere Katze"}];//
                 console.log("Was steht in foundItems im Service: " + foundItems);
                 foundItems.forEach(function (item){
