@@ -44,6 +44,7 @@
             })
             .then(function (result){
                 var filteredItems = [];
+                console.log("Was steht in result im Service: " + result)
                 var foundItems = result.data.menu_items;
                 console.log("Was steht in foundItems: " + foundItems)
                 foundItems.forEach(function (item){
