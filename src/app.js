@@ -45,9 +45,9 @@
             })
             .then(function (result){
                 var filteredItems = [];
-                console.log("Was steht in result im Service: " + result)
+                console.log("Was steht in result im Service: " + result);
                 var foundItems = result.data.menu_items;//[{name: "katze"}, {short_name: "katzenfutte"},{description:"lekere Katze"}];//
-                console.log("Was steht in foundItems im Service: " + foundItems)
+                console.log("Was steht in foundItems im Service: " + foundItems);
                 foundItems.forEach(function (item){
                     if(item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase())){
                         filteredItems.push(item);
