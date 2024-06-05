@@ -49,17 +49,17 @@
                     var foundItems = result.data;//[{name: "katze"}, {short_name: "katzenfutte"},{description:"lekere Katze"}];//
                     console.log("Was steht in foundItems im Service: " + foundItems);
                     for (var category in foundItems) {
-                        //filteredItems.push(foundItems[category].menu_items.filter(item => item.description.toLowerCase().includes(searchTerm.toLowerCase())))
-                        for(var item in foundItems[category].menu_items)
+                        filteredItems.push(foundItems[category].menu_items.filter(item => item.description.toLowerCase().includes(searchTerm.toLowerCase())))
+                        /*for(var item in foundItems[category].menu_items)
                         {
                             if(item.description.toLowerCase().includes(searchTerm.toLowerCase())){
                                 filteredItems.push(item);
                             }
-                        }
+                        }*/
                     }
 
                     console.log("Was steht in filteresItems im Service: " + filteredItems)
-                    return filteredItems;//.flat();
+                    return filteredItems.flat();
                 })
                 .catch(function (result) {
                     console.error("es gab einen Fehler im Service: " + result);
