@@ -14,8 +14,9 @@
         controller.searchTerm = "";
         controller.found = null;
         
-        controller.getMenueItem =function ()
+        controller.getMenueItems =function ()
         {
+            console.log("das zu suchende Objekt soll enthalten: " & controller.searchTerm)
             var promise = MenuSearchService.getMatchedMenuItems(controller.searchTerm);
 
             promise.then(function (result) {
@@ -28,7 +29,7 @@
                 });
         }
         
-        controller.removeMenueItem = function(index) {
+        controller.removeMenuItem = function(index) {
             controller.found.splice(index,1);
         }
     }
@@ -46,13 +47,13 @@
                 var filteredItems = [];
                 console.log("Was steht in result im Service: " + result)
                 var foundItems = [{name: "katze"}, {short_name: "katzenfutte"},{description:"lekere Katze"}];//result.data.menu_items;
-                console.log("Was steht in foundItems: " + foundItems)
+                console.log("Was steht in foundItems im Service: " + foundItems)
                 foundItems.forEach(function (item){
                     if(item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase())){
                         filteredItems.push(item);
                     }
                 });
-                console.log("Was steht in filteresItems: "+ filteredItems)
+                console.log("Was steht in filteresItems im Service: "+ filteredItems)
                 return filteredItems;
             })
             .catch(function (result){

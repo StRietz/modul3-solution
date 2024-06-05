@@ -16,7 +16,7 @@
         <input ng-model="controller.searchTerm" type="text" placeholder="search term" class="form-control">
     </div>
     <div class="form-group narrow-button">
-        <button class="btn btn-primary" ng-click="controller.getMenueItem()">Narrow It Down For Me!</button>
+        <button class="btn btn-primary" ng-click="controller.getMenuItems()">Narrow It Down For Me!</button>
     </div>
 
     <found-items items="controller.found" on-remove="controller.removeMenueItem(index)"></found-items>
