@@ -1,19 +1,11 @@
 <table class="table table-striped">
   <tr>
     <th>Name</th>
-    <th>Short Name</th>
-    <th>Description</th>
     <th></th>
   </tr>
-  <tr ng-repeat="item in controller.items">
+  <tr ng-repeat="item in items">
     <td>
-      {{item.name}}
-    </td>
-    <td>
-      {{item.short_name}}
-    </td>
-    <td>
-      {{item.description}}
+      {{item}}
     </td>
     <td>
       <button ng-click="controller.onRemove({index: $index});"

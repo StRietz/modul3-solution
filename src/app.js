@@ -70,6 +70,7 @@
             templateUrl: "foundItems.html",
             scope: {
                 items: "<",
+                onRemote: '&'
             },
             controller: NarrowItDownController,
             controllerAs: "controller",
