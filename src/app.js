@@ -48,8 +48,8 @@
                     console.log("Was steht in result im Service: " + result.data);
                     var foundItems = result.data;//[{name: "katze"}, {short_name: "katzenfutte"},{description:"lekere Katze"}];//
                     console.log("Was steht in foundItems im Service: " + foundItems);
-                    for (var category in data) {
-                        filteredItems.push(data[category].menu_items.filter(item => item.description.toLowerCase().includes(searchTerm.toLowerCase())))
+                    for (var category in foundItems) {
+                        filteredItems.push(foundItems[category].menu_items.filter(item => item.description.toLowerCase().includes(searchTerm.toLowerCase())))
                     }
 
                     console.log("Was steht in filteresItems im Service: " + filteredItems)
