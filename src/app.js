@@ -19,12 +19,12 @@
             var promise = MenuSearchService.getMatchedMenuItems(controller.searchTerm);
 
             promise.then(function (result) {
+                console.log("Controller Ergebis: " + result)
                 controller.found=result;
-                console.log(result.data)
                 return controller.found;
             })
                 .catch(function (error) {
-                    console.log(error);
+                    console.log("es gab einen Fehler im Controller: " + error);
                 });
         }
         
@@ -45,16 +45,17 @@
             .then(function (result){
                 var filteredItems = [];
                 var foundItems = result.data.menu_items;
-                
+                console.log("Was steht in foundItems: " + foundItems)
                 foundItems.forEach(function (item){
-                    if(item.description.toLowerCase().includes(searchTerm.toLowerCase())){
+                    if(item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase())){
                         filteredItems.push(item);
                     }
                 });
+                console.log("Was steht in filteresItems: "+ filteredItems)
                 return filteredItems;
             })
             .catch(function (result){
-                console.error(result);
+                console.error("es gab einen Fehler im Service: " +result);
             });
             return service;
         }
