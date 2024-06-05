@@ -53,7 +53,7 @@
                     }
 
                     console.log("Was steht in filteresItems im Service: " + filteredItems)
-                    return filteredItems;
+                    return filteredItems.flat;
                 })
                 .catch(function (result) {
                     console.error("es gab einen Fehler im Service: " + result);
