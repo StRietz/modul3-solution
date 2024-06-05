@@ -13,52 +13,51 @@
         var controller = this;
         controller.searchTerm = "";
         controller.found = null;
-        
-        controller.getMenuItems =function ()
-        {
+
+        controller.getMenuItems = function () {
             console.log("das zu suchende Objekt soll enthalten: " & controller.searchTerm)
             var promise = MenuSearchService.getMatchedMenuItems(controller.searchTerm);
 
             promise.then(function (result) {
                 console.log("Controller Ergebis: " + result)
-                controller.found=result;
+                controller.found = result;
                 return controller.found;
             })
                 .catch(function (error) {
                     console.log("es gab einen Fehler im Controller: " + error);
                 });
         }
-        
-        controller.removeMenuItem = function(index) {
-            controller.found.splice(index,1);
+
+        controller.removeMenuItem = function (index) {
+            controller.found.splice(index, 1);
         }
     }
 
-    MenuSearchService.$inject=["$http", "ApiBasePath"]
+    MenuSearchService.$inject = ["$http", "ApiBasePath"]
+
     function MenuSearchService($http, ApiBasePath) {
         var service = this;
-        
+
         service.getMatchedMenuItems = function (searchTerm) {
             return $http({
                 method: "GET",
                 url: (ApiBasePath + "/menu_items.json"),
             })
-            .then(function (result){
-                var filteredItems = [];
-                console.log("Was steht in result im Service: " + result.data);
-                var foundItems = result.data.menu_items;//[{name: "katze"}, {short_name: "katzenfutte"},{description:"lekere Katze"}];//
-                console.log("Was steht in foundItems im Service: " + foundItems);
-                foundItems.forEach(function (item){
-                    if(item.description && item.description.toLowerCase().includes(searchTerm.toLowerCase())){
-                        filteredItems.push(item);
+                .then(function (result) {
+                    var filteredItems = [];
+                    console.log("Was steht in result im Service: " + result.data);
+                    var foundItems = result.data;//[{name: "katze"}, {short_name: "katzenfutte"},{description:"lekere Katze"}];//
+                    console.log("Was steht in foundItems im Service: " + foundItems);
+                    for (var category in data) {
+                        filteredItems.push(data[category].menu_items.filter(item => item.description.toLowerCase().includes(searchTerm.toLowerCase())))
                     }
+
+                    console.log("Was steht in filteresItems im Service: " + filteredItems)
+                    return filteredItems;
+                })
+                .catch(function (result) {
+                    console.error("es gab einen Fehler im Service: " + result);
                 });
-                console.log("Was steht in filteresItems im Service: "+ filteredItems)
-                return filteredItems;
-            })
-            .catch(function (result){
-                console.error("es gab einen Fehler im Service: " +result);
-            });
             return service;
         }
     }
@@ -78,4 +77,5 @@
         };
         return ddo;
     };
-})();
+})
+();
