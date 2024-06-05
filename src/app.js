@@ -14,7 +14,7 @@
         controller.searchTerm = "";
         controller.found = null;
         
-        controller.getMenueItems =function ()
+        controller.getMenuItems =function ()
         {
             console.log("das zu suchende Objekt soll enthalten: " & controller.searchTerm)
             var promise = MenuSearchService.getMatchedMenuItems(controller.searchTerm);
