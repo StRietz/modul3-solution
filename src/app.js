@@ -91,8 +91,7 @@
             templateUrl: "foundItems.html",
             scope: {
                 items: '<',
-                onRemote: '&',
-                message: '<'
+                onRemove: '&',
             },
             controller: NarrowItDownController,
             controllerAs: 'controller',
