@@ -53,15 +53,26 @@
                 .then(function (result) {
                     var filteredItems = [];
                     console.log("Was steht in result im Service: " + result.data);
-                    var foundItems = result.data.menu_items;//[{name: "katze"}, {short_name: "katzenfutte"},{description:"lekere Katze"}];//
+                    var foundItems = result.data;//[{name: "katze"}, {short_name: "katzenfutte"},{description:"lekere Katze"}];//
                     console.log("Was steht in foundItems im Service: " + foundItems);
-                    foundItems.forEach(function (found) {
+                    foundItems.forEach(function (category) {
 
+                        foundItems[category].menu_items.forEach(menu)
+                        {
+                            var description = menu.description.toLowerCase();
+                            if (description.includes(searchTerm.toLowerCase())) {
+                                filteredItems.push(menu);
+                                console.log("description: " + description);
+                            }
+                        }
+                        /*
                         var description = found.description.toLowerCase();
                         if (description.includes(searchTerm.toLowerCase())) {
                             filteredItems.push(found);
                             console.log("description: " + description);
                         }
+
+                         */
                     })
 
                     //for (var category in foundItems) {
