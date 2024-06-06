@@ -59,16 +59,14 @@
             })
                 .then(function (result) {
                     var filteredItems = [];
-                    console.log("Was steht in result im Service: " + result.data);
-                    var foundItems = result.data;//[{name: "katze"}, {short_name: "katzenfutte"},{description:"lekere Katze"}];//
-                    console.log("Was steht in foundItems im Service: " + foundItems);
+                    var foundItems = result.data;
                     for (var category in foundItems) {
 
                         for (var menu in foundItems[category].menu_items) {
                             var description = foundItems[category].menu_items[menu].description.toLowerCase();
                             if (description.includes(searchTerm.toLowerCase())) {
                                 filteredItems.push(foundItems[category].menu_items[menu]);
-                                console.log("description: " + description);
+                                console.log("found description: " + description);
                             }
                         }
 
@@ -79,11 +77,10 @@
 
                     //}
 
-                    console.log("Was steht in filteresItems im Service: " + filteredItems)
                     return filteredItems.flat();
                 })
                 .catch(function (result) {
-                    console.error("es gab einen Fehler im Service: " + result);
+                    console.error("Something went wrong: " + result);
                 });
         }
     }
