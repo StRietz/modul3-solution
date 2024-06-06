@@ -33,11 +33,11 @@
                     .catch(function (error) {
                         console.log("Something went wrong: " + error);
                         controller.found = [];
-                        controller.message = "Nothing Found! 2";
+                        controller.message = "Nothing Found!";
                     });
             } else {
                 controller.found = [];
-                controller.message = "Please enter a value to be searched for";
+                controller.message = "Nothing Found!";
             }
         }
 
