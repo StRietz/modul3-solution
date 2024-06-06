@@ -12,7 +12,7 @@
     function NarrowItDownController(MenuSearchService) {
         var controller = this;
         controller.searchTerm = "";
-        controller.found = null;
+        controller.found = [];
         controller.message = "";
 
         controller.getMenuItems = function () {
@@ -26,15 +26,18 @@
                         controller.message = "";
                     } else {
                         console.log("Nothing Found!");
+                        controller.found=[];
                         controller.message = "Nothing Found!";
                     }
                 })
                     .catch(function (error) {
                         console.log("Something went wrong: " + error);
+                        controller.found=[];
                         controller.message = "Nothing Found! 2";
                     });
             }
             else{
+                controller.found=[];
                 controller.message="Please enter a value to be searched for";
             }
         }
