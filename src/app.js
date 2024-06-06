@@ -16,23 +16,27 @@
         controller.message = "";
 
         controller.getMenuItems = function () {
-            console.log("das zu suchende Objekt soll enthalten: " & controller.searchTerm)
-            var promise = MenuSearchService.getMatchedMenuItems(controller.searchTerm);
+            if (searchTerm.trim() != "") {
+                var promise = MenuSearchService.getMatchedMenuItems(controller.searchTerm);
 
-            promise.then(function (result) {
-                if (result && result.length > 0) {
-                    console.log("Controller Ergebis: " + result)
-                    controller.found = result;
-                    controller.message = "";
-                    //return controller.found;
-                } else {
-                    console.log("Nothing Found!");
-                    controller.message = "Nothing Found!";
-                }
-            })
-                .catch(function (error) {
-                    console.log("es gab einen Fehler im Controller: " + error);
-                });
+                promise.then(function (result) {
+                    if (result && result.length > 0) {
+                        console.log("Controller Ergebis: " + result)
+                        controller.found = result;
+                        controller.message = "";
+                    } else {
+                        console.log("Nothing Found!");
+                        controller.message = "Nothing Found!";
+                    }
+                })
+                    .catch(function (error) {
+                        console.log("Something went wrong: " + error);
+                        controller.message = "Nothing Found! 2";
+                    });
+            }
+            else{
+                controller.message="Please enter a value to be searched for";
+            }
         }
 
         controller.removeMenuItem = function (index) {
@@ -55,34 +59,21 @@
                     console.log("Was steht in result im Service: " + result.data);
                     var foundItems = result.data;//[{name: "katze"}, {short_name: "katzenfutte"},{description:"lekere Katze"}];//
                     console.log("Was steht in foundItems im Service: " + foundItems);
-                    for (var category in foundItems){
+                    for (var category in foundItems) {
 
-                        for (var menu in foundItems[category].menu_items)
-                        {
+                        for (var menu in foundItems[category].menu_items) {
                             var description = foundItems[category].menu_items[menu].description.toLowerCase();
                             if (description.includes(searchTerm.toLowerCase())) {
                                 filteredItems.push(foundItems[category].menu_items[menu]);
                                 console.log("description: " + description);
                             }
                         }
-                        /*
-                        var description = found.description.toLowerCase();
-                        if (description.includes(searchTerm.toLowerCase())) {
-                            filteredItems.push(found);
-                            console.log("description: " + description);
-                        }
 
-                         */
                     }
 
                     //for (var category in foundItems) {
                     //  filteredItems.push(foundItems[category].menu_items.filter(item => item.description.toLowerCase().includes(searchTerm.toLowerCase())))
-                    /*for(var item in foundItems[category].menu_items)
-                    {
-                        if(item.description.toLowerCase().includes(searchTerm.toLowerCase())){
-                            filteredItems.push(item);
-                        }
-                    }*/
+
                     //}
 
                     console.log("Was steht in filteresItems im Service: " + filteredItems)
