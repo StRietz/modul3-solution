@@ -13,15 +13,22 @@
         var controller = this;
         controller.searchTerm = "";
         controller.found = null;
+        controller.message = "";
 
         controller.getMenuItems = function () {
             console.log("das zu suchende Objekt soll enthalten: " & controller.searchTerm)
             var promise = MenuSearchService.getMatchedMenuItems(controller.searchTerm);
 
             promise.then(function (result) {
-                console.log("Controller Ergebis: " + result)
-                controller.found = result;
-                return controller.found;
+                if (result && result.length > 0) {
+                    console.log("Controller Ergebis: " + result)
+                    controller.found = result;
+                    controller.message = "";
+                    //return controller.found;
+                } else {
+                    console.log("Nothing Found!");
+                    controller.message = "Nothing Found!";
+                }
             })
                 .catch(function (error) {
                     console.log("es gab einen Fehler im Controller: " + error);
@@ -46,17 +53,26 @@
                 .then(function (result) {
                     var filteredItems = [];
                     console.log("Was steht in result im Service: " + result.data);
-                    var foundItems = result.data;//[{name: "katze"}, {short_name: "katzenfutte"},{description:"lekere Katze"}];//
+                    var foundItems = result.data.menu_items;//[{name: "katze"}, {short_name: "katzenfutte"},{description:"lekere Katze"}];//
                     console.log("Was steht in foundItems im Service: " + foundItems);
-                    for (var category in foundItems) {
-                        filteredItems.push(foundItems[category].menu_items.filter(item => item.description.toLowerCase().includes(searchTerm.toLowerCase())))
-                        /*for(var item in foundItems[category].menu_items)
-                        {
-                            if(item.description.toLowerCase().includes(searchTerm.toLowerCase())){
-                                filteredItems.push(item);
-                            }
-                        }*/
-                    }
+                    foundItems.forEach(function (found) {
+
+                        var description = found.description.toLowerCase();
+                        if (description.includes(searchTerm.toLowerCase())) {
+                            filteredItems.push(found);
+                            console.log("description: " + description);
+                        }
+                    })
+
+                    //for (var category in foundItems) {
+                    //  filteredItems.push(foundItems[category].menu_items.filter(item => item.description.toLowerCase().includes(searchTerm.toLowerCase())))
+                    /*for(var item in foundItems[category].menu_items)
+                    {
+                        if(item.description.toLowerCase().includes(searchTerm.toLowerCase())){
+                            filteredItems.push(item);
+                        }
+                    }*/
+                    //}
 
                     console.log("Was steht in filteresItems im Service: " + filteredItems)
                     return filteredItems.flat();
@@ -64,22 +80,20 @@
                 .catch(function (result) {
                     console.error("es gab einen Fehler im Service: " + result);
                 });
-            return service;
         }
     }
 
-    FoundItemsDirective.$inject = [];
-
     function FoundItemsDirective() {
         var ddo = {
-            restrict: "E",
+            restrict: 'E',
             templateUrl: "foundItems.html",
             scope: {
-                items: "<",
-                onRemote: '&'
+                items: '<',
+                onRemote: '&',
+                message: '<'
             },
             controller: NarrowItDownController,
-            controllerAs: "controller",
+            controllerAs: 'controller',
             bindToController: true
         };
         return ddo;
