@@ -16,7 +16,7 @@
         controller.message = "";
 
         controller.getMenuItems = function () {
-            if (controller.searchTerm.trim() != "") {
+            if (controller.searchTerm.trim() !== "") {
                 var promise = MenuSearchService.getMatchedMenuItems(controller.searchTerm);
 
                 promise.then(function (result) {
@@ -26,19 +26,18 @@
                         controller.message = "";
                     } else {
                         console.log("Nothing Found!");
-                        controller.found=[];
+                        controller.found = [];
                         controller.message = "Nothing Found!";
                     }
                 })
                     .catch(function (error) {
                         console.log("Something went wrong: " + error);
-                        controller.found=[];
+                        controller.found = [];
                         controller.message = "Nothing Found! 2";
                     });
-            }
-            else{
-                controller.found=[];
-                controller.message="Please enter a value to be searched for";
+            } else {
+                controller.found = [];
+                controller.message = "Please enter a value to be searched for";
             }
         }
 
@@ -60,26 +59,11 @@
                 .then(function (result) {
                     var filteredItems = [];
                     var foundItems = result.data;
-                    /*
+
                     for (var category in foundItems) {
-
-                        for (var menu in foundItems[category].menu_items) {
-                            var description = foundItems[category].menu_items[menu].description.toLowerCase();
-                            if (description.includes(searchTerm.toLowerCase())) {
-                                filteredItems.push(foundItems[category].menu_items[menu]);
-                                console.log("found description: " + description);
-                            }
-                        }
-
+                        filteredItems.push(foundItems[category].menu_items.filter(item =>
+                            item.description.toLowerCase().includes(searchTerm.toLowerCase())))
                     }
-
-
-                     */
-                    for (var category in foundItems) {
-                      filteredItems.push(foundItems[category].menu_items.filter(item => item.description.toLowerCase().includes(searchTerm.toLowerCase())))
-
-                    }
-
                     return filteredItems.flat();
                 })
                 .catch(function (result) {
@@ -101,6 +85,5 @@
             bindToController: true
         };
         return ddo;
-    };
-})
-();
+    }
+});
