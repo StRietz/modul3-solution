@@ -59,9 +59,9 @@
 
                         for (var menu in foundItems[category].menu_items)
                         {
-                            var description = menu.description.toLowerCase();
+                            var description = foundItems[category].menu_items[menu].description.toLowerCase();
                             if (description.includes(searchTerm.toLowerCase())) {
-                                filteredItems.push(menu);
+                                filteredItems.push(foundItems[category].menu_items[menu]);
                                 console.log("description: " + description);
                             }
                         }
