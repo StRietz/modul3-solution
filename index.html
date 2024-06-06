@@ -18,8 +18,9 @@
     <div class="form-group narrow-button">
         <button class="btn btn-primary" ng-click="controller.getMenuItems()">Narrow It Down For Me!</button>
     </div>
-    <h3 ng-if="controller.message" class="message">{{controller.message}}</h3>
+
     <found-items items="controller.found" on-remove="controller.removeMenuItem(index)"></found-items>
+    <h3 ng-if="controller.message" class="message">{{controller.message}}</h3>
 </div>
 
 </body>

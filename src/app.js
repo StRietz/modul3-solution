@@ -60,6 +60,7 @@
                 .then(function (result) {
                     var filteredItems = [];
                     var foundItems = result.data;
+                    /*
                     for (var category in foundItems) {
 
                         for (var menu in foundItems[category].menu_items) {
@@ -72,10 +73,12 @@
 
                     }
 
-                    //for (var category in foundItems) {
-                    //  filteredItems.push(foundItems[category].menu_items.filter(item => item.description.toLowerCase().includes(searchTerm.toLowerCase())))
 
-                    //}
+                     */
+                    for (var category in foundItems) {
+                      filteredItems.push(foundItems[category].menu_items.filter(item => item.description.toLowerCase().includes(searchTerm.toLowerCase())))
+
+                    }
 
                     return filteredItems.flat();
                 })
