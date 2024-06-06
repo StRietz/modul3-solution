@@ -16,7 +16,7 @@
         controller.message = "";
 
         controller.getMenuItems = function () {
-            if (searchTerm.trim() != "") {
+            if (controller.searchTerm.trim() != "") {
                 var promise = MenuSearchService.getMatchedMenuItems(controller.searchTerm);
 
                 promise.then(function (result) {
